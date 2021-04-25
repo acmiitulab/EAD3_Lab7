@@ -1,11 +1,13 @@
 package com.example.demo.Controller;
 
 
+import com.example.demo.Models.Role;
 import com.example.demo.Models.User;
 import com.example.demo.Service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 
@@ -34,21 +36,17 @@ public class UserController {
 
 
     @PostMapping("")
-    public void createUser( @RequestParam("username") String name, @RequestParam("password") String password) {
-        User user =  new User(0, name, password, false);
+    public void createUser( @RequestBody User user) {
 
         userServise.update(user);
 
     }
 
     @PutMapping("")
-    public void updateUser( @RequestParam("username") String name, @RequestParam("password") String password) {
-        User user = userServise.getByUsername(name);
-        if (user == null) {
-            return;
-        }
-        user.setPassword(password);
+    public void updateUser( @RequestBody User user) {
+
         userServise.update(user);
+
     }
 
 

@@ -36,12 +36,8 @@ public class BookController {
 
     @PostMapping("")
     public void createBook(
-            @RequestParam("name") String name,
-            @RequestParam("isAvailable") boolean isAvailable
-
+            @RequestBody Book book
     ) {
-
-        Book book = new Book(0, name, isAvailable);
 
         bookServise.update(book);
 
@@ -49,14 +45,10 @@ public class BookController {
 
     @PutMapping("")
     public void updateBook(
-            @RequestParam("id") int id,
-            @RequestParam("name") String name
+            @RequestBody Book book
+
     ) {
-        Book book = bookServise.getByID(id);
-        if (book == null) {
-            return;
-        }
-        book.setName(name);
+
         bookServise.update(book);
     }
 }

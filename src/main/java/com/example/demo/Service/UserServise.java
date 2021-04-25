@@ -3,15 +3,27 @@ package com.example.demo.Service;
 import com.example.demo.Models.User;
 import com.example.demo.Repositories.UserRep;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class UserServise implements IUserServise {
+public class UserServise implements IUserServise, UserDetailsService {
     @Autowired
     private UserRep userRep;
 
+    @Autowired
+    private BCryptPasswordEncoder passwordEncoder;
+
+    @Override
+    public boolean checkByLoginAndPassword(String login, String password) {
+        return userRep.existsUserByUsernameAndPassword(login, password);
+    }
 
     public User getById (int id) {
         return userRep.getById(id);
@@ -39,6 +51,7 @@ public class UserServise implements IUserServise {
     }
 
     public void update (User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         userRep.save(user);
     }
 
@@ -48,6 +61,23 @@ public class UserServise implements IUserServise {
 
     public void DeleteByID(long id) {
         userRep.deleteById(id);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String login) throws UsernameNotFoundException {
+        List<User> member = userRep.findAll();
+        User user = null;
+        
+        for (User usr : member) {
+            if (usr.getUsername().equals(login)) {
+                user = usr;
+            }
+        }
+ 
+        if (user == null) {
+            throw new UsernameNotFoundException("Member by login=" + login + " not found!");
+        }
+        return user;
     }
 
 

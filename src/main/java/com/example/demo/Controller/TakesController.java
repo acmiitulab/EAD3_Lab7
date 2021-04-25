@@ -74,7 +74,8 @@ public class TakesController {
     }
 
     @PutMapping("")
-    public void updateUser( @RequestParam("id") int id, @RequestParam("isReturned") boolean isReturned) {
+
+    public void updateTakes( @RequestParam("id") int id, @RequestParam("isReturned") boolean isReturned) {
 
 
         TakeBook takeBook = takesServise.getByID(id);

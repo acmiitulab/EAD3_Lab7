@@ -19,4 +19,6 @@ public interface IUserServise {
     List<User> getAllUsersBy();
 
     void DeleteByID(long id);
+
+    boolean checkByLoginAndPassword(String login, String password);
 }
