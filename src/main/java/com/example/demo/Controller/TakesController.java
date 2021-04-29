@@ -59,7 +59,7 @@ public class TakesController {
             if (!book.getAvailable())
                 continue;
 
-            book.setAvailable(false);
+            book.setIsAvailable(false);
             bookServise.update(book);
             booksToTake.add(book);
 
@@ -79,9 +79,9 @@ public class TakesController {
 
 
         TakeBook takeBook = takesServise.getByID(id);
-        takeBook.setActive(isReturned);
+        takeBook.setIsReturned(isReturned);
         for (Book book : takeBook.getBooks()) {
-            book.setAvailable(isReturned);
+            book.setIsAvailable(isReturned);
             bookServise.update(book);
         }
         takesServise.Update(takeBook);

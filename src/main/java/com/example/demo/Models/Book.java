@@ -1,7 +1,14 @@
 package com.example.demo.Models;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 @Entity
+@Setter
+@Getter
+@NoArgsConstructor
 public class Book {
 
     @Id
@@ -18,42 +25,8 @@ public class Book {
         this.name = name;
         this.isAvailable = isAvailable;
     }
-    public Book () {
-
-    }
-
-    public String getName() {
-        return name;
-    }
 
     public Boolean getAvailable() {
         return isAvailable;
     }
-
-    public void setAvailable(Boolean available) {
-        isAvailable = available;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public TakeBook getTakeBook() {
-        return takeBook;
-    }
-
-    public void setTakeBook(TakeBook takeBook) {
-        this.takeBook = takeBook;
-    }
-
-
-
 }

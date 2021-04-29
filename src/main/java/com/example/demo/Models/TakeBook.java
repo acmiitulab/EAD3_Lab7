@@ -1,9 +1,16 @@
 package com.example.demo.Models;
 
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 
 @Entity
+@Setter
+@Getter
+@NoArgsConstructor
 public class TakeBook {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -36,46 +43,5 @@ public class TakeBook {
         this.isReturned = isReturned;
     }
 
-    public TakeBook() {
-    }
 
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
-    }
-
-    public Boolean getActive() {
-        return isReturned;
-    }
-
-    public void setActive(Boolean active) {
-        isReturned = active;
-    }
-
-    public List<Book> getBooks() {
-        return books;
-    }
-
-    public void setBooks(List<Book> books) {
-        this.books = books;
-    }
-
-    public Boolean isDone() {
-        return isReturned;
-    }
-
-    public void setDone(Boolean done) {
-        isReturned = done;
-    }
 }
